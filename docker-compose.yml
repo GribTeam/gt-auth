@@ -1,0 +1,16 @@
+version: '2'
+services:
+    app:
+      container_name: 'gt-auth'
+      image: node:8.12.0-alpine
+      working_dir: /home/node/app
+      volumes:
+        - ./:/home/node/app
+      mem_limit: 512mb
+      memswap_limit: 512mb
+      command: "npm start"
+      environment:
+        JWT_SECRET: '123'
+        DEBUG: express:*
+        #NODE_ENV: 'production'
+      network_mode: host

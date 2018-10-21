@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title Login de acesso
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css")
+  body(style="background-image:url('public/img/bg-all.jpg'); height:auto")
+    .container
+    .row.col-md-8      
+    .row.col-md-4
+      h3(style="color:white") Login
+      form
+        .form-group.label(for="email") Email
+          input.form-control(type="email", id="email", placeholder="Endereço de email", autofocus)
+        .form-group.label(for="senha") Senha
+          input.form-control(type="senha", id="senha", placeholder="Senha")
+        .form-group
+          .button.btn.btn-default.btn-block(type="button") Logar
+        .form-group
+          a.btn.btn-primary.btn-block(href="/auth/facebook/")
+            i.fab.fa-facebook
+            |  Facebook
+          a.btn.btn-primary.btn-block(href="/auth/google/")
+            i.fab.fa-google
+            |  Google
+        
+    
