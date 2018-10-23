@@ -8,8 +8,8 @@ const router = express.Router()
 
 passport.use(
   new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    clientID: process.env.FACEBOOK_APP_ID || '',
+    clientSecret: process.env.FACEBOOK_APP_SECRET || '',
     callbackURL: '/auth/facebook/autenticated'
   }, (accessToken, refreshToken, profile, done) => {
     done(null)
