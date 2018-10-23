@@ -11,14 +11,14 @@ const facebook = require('./infrastructure/routes/auth/facebook')
 
 app.use(compression())
 app.use(index)
-app.use(facebook)
+//app.use(facebook)
 // app.use(google)
 app.use('/public', express.static('public'))
 
-app.set('views', './views')
+app.set('views', './src/views')
 app.set('view engine', 'pug')
 
 app.listen(
-  process.env.PORT,
-  process.env.HOST
+  process.env.PORT || 8080,
+  process.env.HOST || "127.0.0.1"
 )
