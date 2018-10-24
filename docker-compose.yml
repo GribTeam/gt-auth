@@ -1,7 +1,7 @@
 version: '2'
 services:
     app:
-      container_name: 'gt-auth'
+      container_name: gt-auth
       image: node:8.12.0-alpine
       working_dir: /home/node/app
       volumes:
@@ -10,7 +10,20 @@ services:
       memswap_limit: 512mb
       command: "npm start"
       environment:
-        JWT_SECRET: '123'
+        JWT_SECRET: 123
         DEBUG: express:*
         #NODE_ENV: 'production'
       network_mode: host
+    db:
+      container_name: gt-mongo-db
+      image: aashreys/mongo-auth
+      restart: always
+      network_mode: host
+      mem_limit: 512mb
+      memswap_limit: 512mb      
+      environment:
+        MONGODB_ADMIN_USER: developer
+        MONGODB_ADMIN_PASS: dev@123
+        MONGODB_APPLICATION_DATABASE: gt-auth
+        MONGODB_APPLICATION_USER: app
+        MONGODB_APPLICATION_PASS: app@123

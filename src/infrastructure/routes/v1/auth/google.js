@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const passport = require('passport')
 const Google = require('passport-google-oauth').OAuthStrategy
-//const token = require('./src/infrastructure/util/generatorToken')
+const token = require('../../../util/generatorToken')
 const router = express.Router()
 
 passport.use(new Google({
@@ -19,9 +19,9 @@ router.get('/v1/auth/google',
   passport.authenticate('google')
 )
 
-/*router.get('/v1/auth/google/autenticated', 
+router.get('/v1/auth/google/autenticated', 
   passport.authenticate('google', { session: false }),
   token.generateAccessToken
-)*/
+)
 
 module.exports = router

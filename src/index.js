@@ -9,6 +9,8 @@ const facebook = require('./infrastructure/routes/v1/auth/facebook')
 const google = require('./infrastructure/routes/v1/auth/google')
 const jwt = require('./infrastructure/routes/v1/auth/jwt')
 
+const mongoose = require('./infrastructure/persistence/mongoDB/mongo')
+
 const app = express()
 app.use(compression())
 app.use(bodyParser.json())

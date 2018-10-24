@@ -4,7 +4,7 @@ const passport = require('passport')
 const Facebook = require('passport-facebook').Strategy
 const router = express.Router()
 
-const token = require('./infrastructure/util/generatorToken')
+const token = require('../../../util/generatorToken')
 
 passport.use(
   new Facebook({
@@ -18,7 +18,7 @@ passport.use(
     // done(null, user)
     // })
   }
-  ))
+))
 
 router.get('/v1/auth/facebook',  
   passport.authenticate('facebook')
