@@ -5,6 +5,7 @@ const Facebook = require('passport-facebook').Strategy
 const router = express.Router()
 
 const token = require('../../../util/generatorToken')
+const User = require('../../../persistence/mongoDB/entity/users')
 
 passport.use(
   new Facebook({
@@ -13,10 +14,10 @@ passport.use(
     callbackURL: '/v1/auth/facebook/autenticated'
   }, (accessToken, refreshToken, profile, done) => {
     done(null)
-    // User.findOrCreate({ facebook_id: profile.id }, function(err, user) {
-    // if (err) { return done(err) }
-    // done(null, user)
-    // })
+     User.findOrCreate({ facebook_id: profile.id }, function(err, user) {
+     if (err) { return done(err) }
+     done(null, user)
+    })
   }
 ))
 
