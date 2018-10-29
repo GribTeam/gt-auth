@@ -7,8 +7,8 @@ const router = express.Router()
 const token = require('../../../util/generatorToken')
 const User = require('../../../persistence/mongo/entity/users')
 
-function generateUserToken(req, res) { 
-  const accessToken = token.generateAccessToken(123);
+function generateUserToken(req, res) {   
+  const accessToken = token.generateAccessToken(req.user.id);
   res.json({
     "token": accessToken
   })
@@ -31,7 +31,7 @@ passport.use(
      upsert: true,
      new: true
    }).then((user) => {
-     done(null, User)
+     done(null, user)
    }).catch((err) => {
      console.log('Mongo ERROR:', err)
      done(null)
