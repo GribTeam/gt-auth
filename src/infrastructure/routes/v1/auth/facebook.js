@@ -10,7 +10,7 @@ const User = require('../../../persistence/mongo/entity/users')
 function generateUserToken(req, res) {   
   const accessToken = token.generateAccessToken(req.user.id);
   res.json({
-    "token": accessToken
+    "jwt_token": accessToken
   })
 }
 
