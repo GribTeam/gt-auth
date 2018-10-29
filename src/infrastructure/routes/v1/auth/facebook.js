@@ -5,28 +5,46 @@ const Facebook = require('passport-facebook').Strategy
 const router = express.Router()
 
 const token = require('../../../util/generatorToken')
-const User = require('../../../persistence/mongoDB/entity/users')
+const User = require('../../../persistence/mongo/entity/users')
+
+function generateUserToken(req, res) { 
+  const accessToken = token.generateAccessToken(123);
+  res.json({
+    "token": accessToken
+  })
+}
 
 passport.use(
   new Facebook({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: '/v1/auth/facebook/autenticated'
+    callbackURL: 'http://localhost/v1/auth/facebook/autenticated'
   }, (accessToken, refreshToken, profile, done) => {
-    done(null)
-     User.findOrCreate({ facebook_id: profile.id }, function(err, user) {
-     if (err) { return done(err) }
-     done(null, user)
-    })
-  }
-))
+    
+    User.findOneAndUpdate({ 
+      facebook_id: profile.id 
+   },{
+     "name" : profile.displayName,
+     //"email": "teste@teste", //profile.emails[0].value,
+     "facebook_id": profile.id
+   },{
+     upsert: true,
+     new: true
+   }).then((user) => {
+     done(null, User)
+   }).catch((err) => {
+     console.log('Mongo ERROR:', err)
+     done(null)
+   })
+   
+  }))
 
 router.get('/v1/auth/facebook',  
-  passport.authenticate('facebook')
+  passport.authenticate('facebook', { session: false })
 )
 
 router.get('/v1/auth/facebook/autenticated', 
   passport.authenticate('facebook', { session: false }),
-  token.generateAccessToken
+  generateUserToken
 )
 module.exports = router

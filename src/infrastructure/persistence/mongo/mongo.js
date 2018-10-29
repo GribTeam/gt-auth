@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+mongoose.set('debug', true);
 mongoose.connect(process.env.MONGODB_URL, {
     auth: {        
         user: process.env.MONGO_DB_USER,
@@ -12,5 +12,7 @@ mongoose.connect(process.env.MONGODB_URL, {
 }).catch((err) => {
     console.log('MongoDB Not Connected - ' + err)
 })
+
+
 
 module.exports = mongoose
