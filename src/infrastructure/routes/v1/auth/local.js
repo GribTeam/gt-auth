@@ -4,6 +4,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router()
 
+const token = require('../../../util/generatorToken')
 const User = require('../../../persistence/mongo/entity/users')
 
 function generateUserToken(req, res) {   
@@ -15,10 +16,10 @@ function generateUserToken(req, res) {
 
 passport.use(new LocalStrategy(
   (email, password, done) => {
-
-    console.log('------>',email,password)
-
-    User.findOne({ email: email }, function(err, user) {
+    User.findOne({ 
+      email: email 
+    }).then((err, user) => { 
+      
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect e-mail.' });
@@ -27,20 +28,19 @@ passport.use(new LocalStrategy(
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
-    });
+
+    }).catch((err) => {
+      console.log('Mongo ERRO '+err)
+      return done(err);
+    })
+
   }
 ))
 
 router.post('/v1/auth/local/',
-    passport.authenticate('local', { 
-      successRedirect: '/v1/auth/local/autenticated',
-      failureRedirect: '/'        
+    passport.authenticate('local', { failureRedirect: '/' }, (req, res) => {
+      console.log(res.message)      
     })
-)
-
-router.get('/v1/auth/local/autenticated', 
-  passport.authenticate('local', { session: false }),
-  generateUserToken
 )
 
 module.exports = router

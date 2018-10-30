@@ -11,22 +11,29 @@ html(lang='en')
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css")
   body(style="background-image:url('public/img/bg-all.jpg'); height:auto")
-    .container        
-      .col-md-5.col-md-offset-4(style="background-color:#F7F7F7; padding:35% 30px 10px 30px;")
-        .h3 Sign in
-        form(action="/v1/auth/local/",  method="POST")          
-          .form-group
-            input.form-control(type="email", id="email", placeholder="Endereço de email", required, autofocus)
-          .form-group
-            input.form-control(type="senha", id="senha", placeholder="Senha", required)
-          .form-group
-            button.btn.btn-success.btn-block(type="submit") Logar
-          .form-group
-            a.btn.btn-primary.btn-block(href="v1/auth/facebook/")
-              i.fab.fa-facebook
-              |  Facebook
-            a.btn.btn-danger.btn-block(href="v1/auth/google/")
-              i.fab.fa-google
-              |  Google
+    .container-fluid       
+      .row
+        .modal.show
+          .modal-dialog
+            .modal-content
+              .modal-header
+                .h3 Sign in
+              .modal-body 
+                form(action="/v1/auth/local/",  method="POST")          
+                    .form-group
+                      input.form-control(type="email", id="email", placeholder="Endereço de email", required, autofocus)
+                    .form-group
+                      input.form-control(type="senha", id="senha", placeholder="Senha", required)
+                    .form-group
+                      button.btn.btn-success.btn-block(type="submit") Logar
+                      #{message}
+              .modal-footer
+                a.btn.btn-primary.btn-block(href="v1/auth/facebook/")
+                  i.fab.fa-facebook
+                  |  Facebook
+                a.btn.btn-danger.btn-block(href="v1/auth/google/")
+                  i.fab.fa-google
+                  |  Google         
+                  
             
     
