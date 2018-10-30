@@ -18,3 +18,8 @@ Autenticações de Serviços
 - MONGO_DB_DATABASE=gt-auth
 - MONGODB_URL=mongodb://127.0.0.1:27017/
 - WORKSPACE_URL=/workspace
+
+**Tecnologias**
+
+- MongoDB
+- NodeJs
