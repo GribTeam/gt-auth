@@ -1,0 +1,15 @@
+language: node_js
+
+git:
+  depth: 3
+
+branches:
+  only:
+  - master
+
+services:
+  - mongodb
+
+env:
+  global:
+    - NODE_ENV=test
