@@ -2,7 +2,7 @@
 Autenticações de Serviços
 
 ** Code Review **
-https://app.codacy.com
+- https://app.codacy.com
 
 **Configuração do ambiente**
 
