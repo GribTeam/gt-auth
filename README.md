@@ -1,6 +1,9 @@
 # gt-auth
 Autenticações de Serviços
 
+** Code Review **
+https://app.codacy.com
+
 **Configuração do ambiente**
 
 - PORT=80
