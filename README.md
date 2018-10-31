@@ -1,7 +1,7 @@
 # gt-auth
 Autenticações de Serviços
 
-** Code Review **
+**Code Review**
 - https://app.codacy.com
 
 **Configuração do ambiente**
