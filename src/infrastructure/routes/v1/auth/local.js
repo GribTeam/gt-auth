@@ -7,7 +7,7 @@ const router = express.Router()
 const token = require('../../../util/generatorToken')
 const User = require('../../../persistence/mongo/entity/users')
 
-function generateUserToken(req, res) {   
+function generateUserToken(req, res) { 
   const accessToken = token.generateAccessToken(req.user.id);
   res.json({
     "jwt_token": accessToken
@@ -15,32 +15,18 @@ function generateUserToken(req, res) {
 }
 
 passport.use(new LocalStrategy(
-  (email, password, done) => {
-    User.findOne({ 
-      email: email 
-    }).then((err, user) => { 
-      
+  (username, password, done) => {    
+    User.findOne({ email: username },  (err, user) => {      
       if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect e-mail.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
+      if (!user) { return done(null, false); }     
+      if (user.password !== password) { return done(null, false); }
       return done(null, user);
-
-    }).catch((err) => {
-      console.log('Mongo ERRO '+err)
-      return done(err);
-    })
-
+    });
   }
-))
+));
 
-router.post('/v1/auth/local/',
-    passport.authenticate('local', { failureRedirect: '/' }, (req, res) => {
-      console.log(res.message)      
-    })
-)
+router.post('/v1/auth/local', 
+  passport.authenticate('local', { session: false, failureRedirect: '/?failure' }),
+  generateUserToken);
 
 module.exports = router

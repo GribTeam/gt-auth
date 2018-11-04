@@ -10,8 +10,4 @@ const User = new mongoose.Schema({
     google_id: {type:String},
 })
 
-User.methods.isValidPassword = (password) => {
-    return (this.password == password)
-}
-
 module.exports = mongoose.model("users", User)
