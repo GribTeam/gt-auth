@@ -19,11 +19,11 @@ html(lang='en')
               .modal-header
                 .h3 Sign in
               .modal-body 
-                form(action="/v1/auth/local/",  method="POST")          
+                form(action="/v1/auth/local",  method="POST")          
                     .form-group
-                      input.form-control(type="email", id="email", placeholder="Endereço de email", required, autofocus)
+                      input.form-control(type="text", name="username" id="username", placeholder="Endereço de email", required, autofocus)
                     .form-group
-                      input.form-control(type="senha", id="senha", placeholder="Senha", required)
+                      input.form-control(type="password", name="password" id="password", placeholder="Senha", required)
                     .form-group
                       button.btn.btn-success.btn-block(type="submit") Logar
                       #{message}
