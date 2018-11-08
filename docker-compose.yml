@@ -1,7 +1,6 @@
 version: '2'
 services:
-    app:
-      container_name: gt-auth
+    gt-auth-app:
       image: node:8.12.0-alpine
       working_dir: /home/node/app
       volumes:
@@ -14,8 +13,7 @@ services:
         DEBUG: express:*
         #NODE_ENV: 'production'
       network_mode: host
-    db:
-      container_name: gt-mongo-db
+    gt-auth-db:      
       image: aashreys/mongo-auth
       restart: always
       network_mode: host
