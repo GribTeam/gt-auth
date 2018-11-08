@@ -1,6 +1,6 @@
 'use strict'
 require('dotenv').config()
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const compression = require('compression')
 const express = require('express')
 const passport = require('passport')
@@ -14,6 +14,7 @@ const local = require('./infrastructure/routes/v1/auth/local')
 
 const app = express()
 app.use(compression())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use(index)
